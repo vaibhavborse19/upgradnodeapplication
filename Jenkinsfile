@@ -17,9 +17,9 @@ pipeline {
 		    image_id = sh(script: "echo ${docker_repo_uri}:${commit_id}", returnStdout: true).trim()
 			
                 }
-		// Get Docker login credentials for ECR
+		// Get Docker login credentials 
                 sh "aws ecr get-login --no-include-email --region ${region} | sh"
-		// Build the Docker image
+		// Build Docker image
                 sh "docker build -t ${docker_repo_uri}:latest ."
                 // Push Docker image
                 sh "docker push ${docker_repo_uri}:latest"
